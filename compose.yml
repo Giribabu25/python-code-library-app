@@ -1,6 +1,6 @@
 services:
   db:
-    image: giribabub/library:db
+    image: giribabub/library:dbimage
     deploy:
       replicas: 1
     ports:
@@ -11,7 +11,7 @@ services:
       - mydata:/var/lib/mysql
 
   auth_service:
-    image: giribabub/library:auth
+    image: giribabub/library:authimage
     deploy:
       replicas: 1
     ports:
@@ -22,7 +22,7 @@ services:
       - db
 
   book_service:
-    image: giribabub/library:book
+    image: giribabub/library:bookimage
     deploy:
       replicas: 1
     ports:
@@ -33,7 +33,7 @@ services:
       - db
 
   borrow_service:
-    image: giribabub/library:borrow
+    image: giribabub/library:borrowimage
     deploy:
       replicas: 1
     ports:
@@ -44,7 +44,7 @@ services:
       - db
 
   frontend:
-    image: giribabub/library:frontend
+    image: giribabub/library:frontendimage
     deploy:
       replicas: 1
     ports:
