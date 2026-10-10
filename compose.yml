@@ -1,60 +1,64 @@
----
 services:
   db:
-    image: shaikmustafa/arshad:db
+    image: giribabub/library:db
     deploy:
       replicas: 1
     ports:
       - "3306:3306"
     networks:
-      - mynetwork
+      - myapp
+    volumes:
+      - mydata:/var/lib/mysql
 
   auth_service:
-    image: shaikmustafa/arshad:auth
+    image: giribabub/library:auth
     deploy:
       replicas: 1
     ports:
       - "5001:5001"
     networks:
-      - mynetwork
+      - myapp
     depends_on:
       - db
-    
 
   book_service:
-    image: shaikmustafa/arshad:book
+    image: giribabub/library:book
     deploy:
       replicas: 1
     ports:
       - "5002:5002"
     networks:
-      - mynetwork
+      - myapp
     depends_on:
       - db
+
   borrow_service:
-    image: shaikmustafa/arshad:borrow
+    image: giribabub/library:borrow
     deploy:
       replicas: 1
     ports:
       - "5003:5003"
     networks:
-      - mynetwork
+      - mydata
     depends_on:
       - db
 
   frontend:
-    image: shaikmustafa/arshad:frontend
+    image: giribabub/library:frontend
     deploy:
       replicas: 1
     ports:
       - "5000:5000"
     networks:
-      - mynetwork
+      - myapp
     depends_on:
       - auth_service
       - book_service
       - borrow_service
 
 networks:
-  mynetwork:
-    driver: bridge
+  myapp:
+    driver: overlay
+volumes:
+  mydata:
+                       
