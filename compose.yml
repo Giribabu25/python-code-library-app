@@ -1,6 +1,6 @@
 services:
   db:
-    image: giribabub/library:dbimage
+    image: giribabub/library:db
     deploy:
       replicas: 1
     ports:
