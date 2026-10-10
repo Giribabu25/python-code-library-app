@@ -39,7 +39,7 @@ services:
     ports:
       - "5003:5003"
     networks:
-      - mydata
+      - myapp
     depends_on:
       - db
 
